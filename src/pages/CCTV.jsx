@@ -1,67 +1,80 @@
-import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import camera1 from "../assets/camera1.webp";
+import camera2 from "../assets/camera2.jpg";
+import camera3 from "../assets/eightCameraPackage/8camera.png"
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
-// Import images from src/assets
-import cctv1 from "../assets/cctv1.jpeg";
-import cctv2 from "../assets/cctv2.webp";
-import cctv3 from "../assets/cctv3.jpeg";
-import cctv4 from "../assets/cctv4.avif";
-import cctv5 from "../assets/cctv5.jpeg";
-import cctv6 from "../assets/cctv6.webp";
-import cctv7 from "../assets/cctv7.jpeg";
+const packages = [
+    {
+        id: "basic",
+        title: "Basic CCTV Package",
+        description: "Ideal for small homes or shops. Includes 1-360 HD camera, a mobile app & setup.",
+        image: camera1, // Replace with your image path
+    },
+    {
+        id: "standard",
+        title: "The 4 camera Package",
+        description: "Perfect for medium premises like homes, offices. Comes with 4 HD cameras & 1TB storage.",
+        image: camera2,
+    },
+    {
+        id: "premium",
+        title: "Eight Camera Package",
+        description: "Best for large businesses. 8+ cameras, night vision, remote monitoring.",
+        image: camera3,
+    },
+];
 
-const cctvImages = [cctv1, cctv2, cctv3, cctv4, cctv5, cctv6, cctv7];
+export default function CCTV() {
+    const navigate = useNavigate();
 
-const CCTV = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % cctvImages.length);
-        }, 3000);
-
-        return () => clearInterval(interval);
-    }, []);
+    const handleViewDetails = (id) => {
+        navigate(`/cctv/${id}`);
+    };
 
     return (
-        <div className="min-h-screen bg-gray-100 p-6">
-            <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-8">CCTV Solutions</h2>
+        <div className="min-h-screen bg-gray-100">
+            <Navbar />
+            
+            {/* Hero Section */}
+            <section className="bg-gradient-to-br from-gray-900 to-gray-700 text-white py-20 text-center">
+                <h1 className="text-5xl font-bold mb-4">Welcome to Nexora CCTV Solutions</h1>
+                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                    Your safety is our top priority. Explore our reliable, high-definition CCTV packages tailored for your needs.
+                </p>
+            </section>
 
-                {/* Slideshow */}
-                <div className="relative w-full h-72 md:h-96 rounded-xl overflow-hidden shadow-xl mb-10">
-                    {cctvImages.map((img, idx) => (
-                        <img
-                            key={idx}
-                            src={img}
-                            alt={`Slide ${idx + 1}`}
-                            className={`absolute w-full h-full object-cover transition-opacity duration-1000 ${
-                                idx === currentIndex ? "opacity-100" : "opacity-0"
-                            }`}
-                        />
-                    ))}
-                    {/* Dot indicators */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-                        {cctvImages.map((_, idx) => (
-                            <div
-                                key={idx}
-                                className={`w-3 h-3 rounded-full ${
-                                    idx === currentIndex ? "bg-white" : "bg-gray-400"
-                                }`}
+            {/* Packages Section */}
+            <section className="py-16 px-6 md:px-20">
+                <h2 className="text-3xl font-semibold text-center mb-12 text-gray-800">Our CCTV Packages</h2>
+
+                <div className="grid md:grid-cols-3 gap-10">
+                    {packages.map((pkg) => (
+                        <div
+                            key={pkg.id}
+                            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+                        >
+                            <img
+                                src={pkg.image}
+                                alt={pkg.title}
+                                className="h-48 w-full object-cover"
                             />
-                        ))}
-                    </div>
+                            <div className="p-6">
+                                <h3 className="text-xl font-semibold mb-2 text-gray-800">{pkg.title}</h3>
+                                <p className="text-gray-600 mb-4">{pkg.description}</p>
+                                <button
+                                    onClick={() => handleViewDetails(pkg.id)}
+                                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+                                >
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-
-                {/* Description */}
-                <div className="text-gray-700 text-lg text-center leading-relaxed">
-                    <p>
-                        We provide reliable CCTV solutions for homes, businesses, and institutions.
-                        Our installations include high-resolution cameras, remote viewing options, and round-the-clock support.
-                    </p>
-                </div>
-            </div>
+            </section>
+            <Footer />
         </div>
     );
-};
-
-export default CCTV;
+}

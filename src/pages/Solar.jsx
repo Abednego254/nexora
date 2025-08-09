@@ -1,14 +1,15 @@
 import { FaSun, FaCheckCircle } from 'react-icons/fa'
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import solarBanner from "../assets/solar.webp" // Replace with your solar banner
+import solarBanner from "../assets/solar.webp"
+import { useNavigate } from "react-router-dom" // 👈 import useNavigate
 
 const solarPackages = [
     {
-        title: "Starter Kit",
-        power: "300W System",
-        price: "Ksh 49,999",
-        features: ["Ideal for basic lighting", "Includes Battery + Inverter", "Free Installation"]
+        title: "SOLAR HOME SYSTEM",
+        power: "50W System",
+        features: ["Ideal for basic lighting, charging", "bulbs", "Includes a battery", "Free Installation"],
+        link: "/solar/solarbasic" // 👈 Add a link
     },
     {
         title: "Home Essentials",
@@ -25,6 +26,8 @@ const solarPackages = [
 ]
 
 const Solar = () => {
+    const navigate = useNavigate(); // 👈 Hook init
+
     return (
         <div className="bg-white text-gray-800">
             <Navbar />
@@ -68,8 +71,11 @@ const Solar = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <button className="mt-6 bg-yellow-500 text-white px-5 py-2 rounded-full hover:bg-yellow-600 transition">
-                                Request This Plan
+                            <button
+                                className="mt-6 bg-yellow-500 text-white px-5 py-2 rounded-full hover:bg-yellow-600 transition"
+                                onClick={() => pkg.link ? navigate(pkg.link) : null} // 👈 navigate if link exists
+                            >
+                                View This Plan
                             </button>
                         </div>
                     ))}

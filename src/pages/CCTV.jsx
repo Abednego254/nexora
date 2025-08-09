@@ -63,12 +63,12 @@ export default function CCTV() {
                             <div className="p-6">
                                 <h3 className="text-xl font-semibold mb-2 text-gray-800">{pkg.title}</h3>
                                 <p className="text-gray-600 mb-4">{pkg.description}</p>
-                                <button
-                                    onClick={() => handleViewDetails(pkg.id)}
-                                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
-                                >
-                                    View Details
-                                </button>
+                                    <button
+                                        onClick={() => handleViewDetails(pkg.id)}
+                                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+                                    >
+                                        View Details
+                                    </button>
                             </div>
                         </div>
                     ))}

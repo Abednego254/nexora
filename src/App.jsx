@@ -10,6 +10,7 @@ import Premium from './pages/Premium';
 import OurWifi from './pages/OurWifi';
 import YourWifi from './pages/YourWifi';
 import Prices from './pages/Prices';
+import SolarBasic from './pages/SolarBasic';
 
 const App = () => {
     return (
@@ -26,6 +27,7 @@ const App = () => {
                 <Route path="/wifi/ourwifi" element={<OurWifi />} />
                 <Route path="/wifi/prices" element={<Prices />} />
                 <Route path="/wifi/yourwifi" element={<YourWifi />} />
+                <Route path="/solar/solarbasic" element={<SolarBasic />} />
             </Routes>
         </Router>
     );
